@@ -1,0 +1,134 @@
+#!/usr/bin/env perl
+use v5.16;
+use warnings;
+use autodie;
+use List::Util 'shuffle';
+
+sub deal {
+  my ($top, @deck) = @_;
+  if ($top =~ /\*$/) {
+    $top = substr($top, 0, -2) . "\n";
+    @deck = shuffle $top, @deck;
+    $deck[-1] = substr($deck[-1], 0, -1) . "*\n";
+  } else {
+    push @deck, $top;
+  }
+  print substr $top, 1;
+  return \@deck;
+}
+
+sub save {
+  my ($deck) = @_;
+  open my $self_fh, '<', $0;
+  my $txt;
+  while (<$self_fh>) {
+    $txt .= /^~/ ? shift @$deck : $_;
+  }
+  close $self_fh;
+  open my $new_self, '>', $0;
+  print $new_self $txt;
+}
+
+my $new_deck = deal(<DATA>);
+save($new_deck);
+
+__DATA__
+~How would you have done it?*
+~Openly resist change
+~Distort time
+~Do the words need changing?
+~Use 'unqualified' people
+~Go to an extreme, come part way back
+~Give the game away
+~Only one element of each kind
+~Consider transitions
+~Retrace your steps
+~Think - inside the work -outside the work
+~Change ambiguities to specifics
+~Ask people to work against their better judgement
+~Do the last thing first
+~Be less critical
+~State the problem as clearly as possible
+~Discard an axiom
+~Don't avoid what is easy
+~The most easily forgotten thing is the most important
+~A line has two sides
+~Display your talent
+~Slow preparation, fast execution
+~Move towards the unimportant
+~It is simply a matter or work
+~Work at a different speed
+~What to increase? What to reduce? What to maintain?
+~Courage!
+~Change nothing and continue consistently
+~Go outside. Shut the door.
+~Magnify the most difficult details
+~Make it more sensual
+~Which parts can be grouped?
+~Remove a restriction
+~Breathe more deeply
+~Adding on
+~Your mistake was a hidden intention
+~What mistakes did you make last time?
+~Do something sudden, destructive and unpredictable
+~What were you really thinking about just now?
+~Simple Subtraction
+~Take a break
+~Disciplined self-indulgence
+~Abandon normal instructions
+~What wouldn't you do?
+~How would someone else do it?
+~Always the first steps
+~Ask your body
+~What is the simplest solution?
+~Destroy nothing; Destroy the most important thing
+~Abandon desire
+~Emphasize differences
+~Use something nearby as a model
+~Repetition is a form of change
+~Be dirty
+~Not building a wall; making a brick
+~When is it for?
+~Take away the important parts
+~Try faking it
+~Use cliches
+~Reverse
+~Only a part, not the whole
+~Is something missing?
+~Make what's perfect more human
+~Where is the edge?
+~Question the heroic
+~Look at the order in which you do things
+~Decorate, decorate
+~Don't stress one thing more than another
+~Tidy up
+~Don't break the silence
+~Turn it upside down
+~Use filters
+~Use your own ideas
+~Is the style right?
+~Accept advice
+~Change specifics to ambiguities
+~Listen to the quiet voice
+~Do nothing for as long as possible
+~Remember quiet evenings
+~Bridges -build -burn
+~Use an old idea
+~Do something boring
+~Voice your suspicions
+~Just carry on
+~What context would look right?
+~Emphasize the flaws
+~Give way to your worst impulse
+~Once the search has begun, something will be found
+~Water
+~What would your closest friend do?
+~Cut a vital connection
+~Would anyone want it?
+~Be extravagant
+~In total darkness, or in a very large room, very quietly
+~Faced with a choice, do both
+~The inconsistency principle
+~Find a safe part and use it as an anchor
+~Discover your formulas and abandon them
+~Is it finished?
