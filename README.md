@@ -1,5 +1,5 @@
 Oblique
-=======
+-------
 Emits an [oblique strategy](http://www.rtqe.net/ObliqueStrategies/OSintro.html) every time it is run. Shuffles the order after the first run.
 
     ./oblique
